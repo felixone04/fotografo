@@ -74,6 +74,8 @@ flutter:
 
   assets:
     - assets/brand/
+    # I caratteri sono dentro l'app: si vedono anche senza internet.
+    - assets/fonts/
 
   # To add assets to your application, add an assets section, like this:
   # assets:
