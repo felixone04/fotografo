@@ -69,6 +69,13 @@ class PhotoAspects extends ChangeNotifier {
     }
   }
 
+  /// Tornata la connessione: si riprovano tutte le foto non riuscite.
+  void retryAll() {
+    _pending.removeAll(_failed);
+    _failed.clear();
+    notifyListeners();
+  }
+
   void resolveAll(Iterable<String> urls) {
     for (final u in urls) {
       resolve(u);
@@ -148,8 +155,18 @@ class PhotoImage extends StatelessWidget {
   /// ridimensionamento della finestra.
   static const _steps = [480, 800, 1200, 1600, 2000, 2600];
 
-  Widget _network(String src) => Image.network(
+  /// Fa riprovare le foto rimaste senza connessione.
+  static void reloadAll() => _reload.value++;
+  static final _reload = ValueNotifier<int>(0);
+
+  Widget _network(String src) => ValueListenableBuilder<int>(
+    valueListenable: _reload,
+    builder: (_, tick, _) => _image(src, tick),
+  );
+
+  Widget _image(String src, int tick) => Image.network(
     src,
+    key: ValueKey(tick),
     fit: fit,
     alignment: alignment,
     gaplessPlayback: true,

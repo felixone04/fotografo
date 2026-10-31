@@ -14,6 +14,7 @@ import 'pages/home_page.dart';
 import 'pages/quote_page.dart';
 import 'pages/works_page.dart';
 import 'services/back_handlers.dart';
+import 'services/connection.dart';
 import 'services/system_bars.dart';
 import 'state/app_state.dart';
 import 'theme/app_theme.dart';
@@ -265,9 +266,19 @@ class _StudioAppState extends State<StudioApp> {
     errorPageBuilder: (c, s) => _fade(s, const HomePage()),
   );
   late final _back = _BackToHome(_router);
+  late final _connection = Connection(
+    navigator: _router.routerDelegate.navigatorKey,
+  );
+
+  @override
+  void initState() {
+    super.initState();
+    _connection.start();
+  }
 
   @override
   void dispose() {
+    _connection.dispose();
     _back.dispose();
     _router.dispose();
     super.dispose();

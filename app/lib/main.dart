@@ -9,6 +9,7 @@ import 'package:visibility_detector/visibility_detector.dart';
 
 import 'app.dart';
 import 'data/repository.dart';
+import 'services/connection.dart';
 import 'state/app_state.dart';
 import 'widgets/common.dart';
 
@@ -39,6 +40,7 @@ Future<void> main() async {
 
   // Nell'app il logo d'apertura lo disegna Flutter (sul web è in index.html).
   introInApp = !kIsWeb;
+  Connection.enabled = !kIsWeb;
   appStartedAt = DateTime.now();
   runApp(ChangeNotifierProvider.value(value: state, child: const StudioApp()));
 }

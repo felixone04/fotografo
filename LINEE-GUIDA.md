@@ -118,7 +118,7 @@ All'arrivo di una richiesta di preventivo può partire un'email di avviso al tit
 ## 5. L'app Flutter
 
 - L'app è già divisa in due: la grafica e lo "scaffale" dei dati (`Repository`). Oggi lo scaffale è il telefono. Con il database si scrive una versione dello scaffale che parla con `api.studio54.it`, e il resto dell'app non cambia.
-- I contenuti pubblici vengono salvati anche sul telefono. Così l'app si apre subito e funziona anche senza rete, mostrando l'ultima versione scaricata.
+- L'app si usa online. Senza internet, all'apertura (o tornando nell'app) compare l'avviso "Siete offline"; appena la connessione torna si chiude da solo e le foto si ricaricano. I caratteri stanno dentro l'app.
 - Area clienti e gestionale funzionano solo online, con l'accesso.
 - Le foto si scaricano da `media.studio54.it` (pubbliche) o con il link a tempo (clienti).
 
